@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript">
+		var blob = new Blob(["Hello World"]);
+ 		const body = document.body;
+		var a = document.createElement("a");
+		a.href = window.URL.createObjectURL(blob);
+		a.download = "hello-world.xlsx";
+		a.textContent = "Download Hello World!";
+		 
+		body.appendChild(a);
+
+	</script>
+</body>
+</html>
