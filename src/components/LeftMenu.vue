@@ -7,7 +7,7 @@
                 text-color="#fff"
                 active-text-color="#409eff" 
                 class="el-menu-vertical-demo">
-                <router-link to="/home">
+                <router-link to="/index/home">
                     <el-menu-item index="0">
                         <i class="fa fa-margin fa-server"></i>
                         <span slot="title">首页</span>
@@ -43,19 +43,19 @@ export default {
           icon: "el-icon-money",
           name: "资金管理",
           path: "fund",
-          children: [{ path: "/foundlist", name: "资金流水" }]
+          children: [{ path: "/index/foundlist", name: "资金流水" }]
         },
         {
           icon: "el-icon-message",
           name: "信息管理",
           path: "info",
-          children: [{ path: "/infoshow", name: "个人信息" }]
+          children: [{ path: "/index/infoshow", name: "个人信息" }]
         },
         {
           icon: "el-icon-edit",
           name: "日记管理",
           path: "daily",
-          children: [{ path: "/dailymanage", name: "个人日记" }]
+          children: [{path:"/index/dailymanage/add",name:"写日记"},{ path: "/index/dailymanage", name: "我的日记" }]
         }
       ]
     };

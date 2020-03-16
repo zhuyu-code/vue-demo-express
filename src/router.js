@@ -8,7 +8,8 @@ import Home from './views/Home'
 import InfoShow from './views/InfoShow'
 import FoundList from './views/FoundList'
 import Daily from './views/Daily';
-import DailyManageItem from './views/DailyManageItem'
+import DailyItem from './views/DailyItem'
+import DailyItemAdd from './views/DailyItemAdd.vue'
 
 Vue.use(Router)
 
@@ -26,11 +27,14 @@ const router = new Router({
       component: Index,
       children: [
         { path: '', component: Home },
-        { path: '/home', name: 'home', component: Home },
-        { path: '/infoshow', name: 'infoshow', component: InfoShow },
-        { path: '/foundlist', name: 'foundlist', component: FoundList },
-        {path:'/dailymanage',name:'dailymanage',component:Daily},
-        {path:'/dailymanage/:userId',name:'dailymanageItem',component:DailyManageItem}
+        { path: 'home', name: 'home', component: Home },
+        { path: 'infoshow', name: 'infoshow', component: InfoShow },
+        { path: 'foundlist', name: 'foundlist', component: FoundList },
+        {path:'dailymanage',name:'daily',component:Daily},
+        {path:'dailymanage/add',name:'dailyAdd',component:DailyItemAdd},
+        {path:'dailymanage/:userId',name:'dailyItem',component:DailyItem},
+        
+       
       ]
     },
   ]

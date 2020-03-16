@@ -13,8 +13,6 @@ export default {
     if (localStorage.eleToken) {
       const decode = jwt_decode(localStorage.eleToken);
       this.$store.dispatch("setIsAutnenticated", !this.isEmpty(decode));
-      console.log("decode是什么意思");
-      console.log(decode);
       this.$store.dispatch("setUser", decode);
     }
   },

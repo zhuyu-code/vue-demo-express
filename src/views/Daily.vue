@@ -1,5 +1,8 @@
 <template>
     <div class="home">
+        <div>
+            新建日记
+        </div>
         <div class="container">
             <template v-for="data in dailyData">
                 <router-link :to='`dailymanage/${data.article_id}`' :key="data.article_id">
@@ -13,6 +16,7 @@
     </div>
 </template>
 <script>
+import store from '../store'
 export default {
     name:"daily",
     data(){
@@ -28,9 +32,8 @@ export default {
     },
     methods:{
         getDaily(){
-            this.$axios.get('/api/article/find/55').then((res)=>{
+            this.$axios.get(`/api/article/find/${store.getters.user.id}`).then((res)=>{
                 this.dailyData=res.data;
-                console.log(this.dailyData)
             })
         }
     },

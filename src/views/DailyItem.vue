@@ -1,35 +1,44 @@
 <template>
   <div>
       <div class="header">
-      <input v-model="input" placeholder="请输入日记标题"/>
+      <input v-model="inputValue"  placeholder="请输入日记标题"/>
       </div>
     <div id="wangeditor">
     <div class="editorElem" ref="editorElem" style="text-align:left;"></div>
   </div>
    <div class="commit">
-     <el-button type="primary" plain>完成</el-button>
+     <el-button @click="handleClick" type="primary" plain>完成</el-button>
    </div>
   </div>
 </template>
 <script>
+import store from '../store'
 import E from "wangeditor";
 export default {
   name: "Editor",
   data() {
     return {
-      input,
+      inputValue:"",
       editor: null,
       editorContent: ''
     };
   },
+  methods:{
+    handleClick(){
+      alert("内容")
+    }
+  },
   // catchData是一个类似回调函数，来自父组件，当然也可以自己写一个函数，主要是用来获取富文本编辑器中的html内容用来传递给服务端
   props: ['catchData'], // 接收父组件的方法
+   created(){
+   
+  },
   mounted() {
     this.editor = new E(this.$refs.editorElem);
     // 编辑器的事件，每次改变会获取其html内容
     this.editor.customConfig.onchange = html => {
       this.editorContent = html;
-      this.catchData(this.editorContent); // 把这个html通过catchData的方法传入父组件
+      // this.catchData(this.editorContent); // 把这个html通过catchData的方法传入父组件
     };
     this.editor.customConfig.menus = [
       // 菜单配置
@@ -54,7 +63,12 @@ export default {
       'redo' // 重复
     ];
     this.editor.create(); // 创建富文本实例
-    this.editor.txt.html('<p>用 JS 设置的内容</p>')
+    this.editor.txt.html('<p>初始内容</p>')
+    this.$axios.get(`/api/article/findOne/${this.$route.params.userId}`).then(res=>{
+      this.inputValue=res.data[0].article_title;
+      this.editorContent=res.data[0].article_content;
+      this.editor.txt.html(this.editorContent);
+    })
   }
   }
 </script>
